@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Air Quality + Health Risk Monitor</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="brand-mark" aria-hidden="true">AQ</div>
+      <div class="brand-copy">
+        <p class="eyebrow">SMART CITY / AIR INTELLIGENCE</p>
+        <h1>Air quality dashboard</h1>
+        <p class="tagline">Live conditions, health guidance, and sensor network activity.</p>
+      </div>
+      <div class="network-state" aria-label="Network refreshes every five seconds">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class="network-state__label">Network live</span>
+        <span class="network-state__detail">Refreshes every 5 sec</span>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="Air quality overview">
+      <article class="card highlight home-card">
+        <div class="home-card__header">
+          <div>
+            <p class="card-kicker">YOUR LOCATION</p>
+            <h2 id="home-title">Set your home city</h2>
+          </div>
+          <button id="change-home" class="ghost-button" hidden>Change</button>
+        </div>
+        <div class="aqi-reading">
+          <div class="aqi-value" id="home-aqi">--</div>
+          <span class="aqi-status" id="home-status">Awaiting location</span>
+        </div>
+        <p class="home-advisory" id="home-advisory">Search for a city below and set it as home.</p>
+        <div class="reading-meta">
+          <div><span>LOCATION</span><strong id="home-city">--</strong></div>
+          <div><span>PM2.5</span><strong id="home-pm25">--</strong></div>
+          <div><span>PM10</span><strong id="home-pm10">--</strong></div>
+          <div><span>LAST UPDATED</span><strong id="home-updated">--</strong></div>
+        </div>
+      </article>
+
+      <article class="card timeline-card">
+        <div class="card-header-inline">
+          <div>
+            <p class="card-kicker">TREND</p>
+            <h2>Air quality over time</h2>
+          </div>
+          <span class="muted chart-caption" id="timeline-hint">Waiting for home city...</span>
+        </div>
+        <canvas id="aqi-chart" width="400" height="220"></canvas>
+      </article>
+
+      <article class="card alerts-card">
+        <p class="card-kicker">STAY INFORMED</p>
+        <h2>Alerts &amp; guidance</h2>
+        <div id="alerts-advice" class="advice-box">
+          Add a home city to receive personalized notifications.
+        </div>
+        <ul id="alert-list" class="alert-list">
+          <li>Loading network alerts...</li>
+        </ul>
+      </article>
+
+      <article class="card wide health-card">
+        <div class="section-heading">
+          <div>
+            <p class="card-kicker">CITY SNAPSHOT</p>
+            <h2>Health risk monitor</h2>
+          </div>
+          <span class="section-note">Air quality across the network</span>
+        </div>
+        <div id="risk-grid" class="risk-grid">
+          <p class="muted">Collecting data...</p>
+        </div>
+      </article>
+
+      <article class="card wide search-card">
+        <div class="section-heading">
+          <div>
+            <p class="card-kicker">EXPLORE</p>
+            <h2>Find air quality near you</h2>
+            <p class="section-description">Search for a city, station, or landmark to see nearby readings.</p>
+          </div>
+        </div>
+        <div class="location-search">
+          <input
+            type="text"
+            id="location-input"
+            placeholder="For example, Bhopal or Indore"
+            aria-label="Location search"
+          />
+          <button id="location-button">Search</button>
+        </div>
+        <div class="location-layout">
+          <div class="location-results">
+            <ul id="location-results">
+              <li class="muted">Type a city name to pull live readings or set it as home.</li>
+            </ul>
+          </div>
+          <div id="map" aria-label="Map of live AQI search results"></div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/app.js" type="module"></script>
+</body>
+
+</html>
+
