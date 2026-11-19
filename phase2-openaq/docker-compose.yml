@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: smart-aqi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smart_aqi
+      POSTGRES_USER: aqi_user
+      POSTGRES_PASSWORD: change_me
+    ports:
+      - "5432:5432"
+    volumes:
+      - smart_aqi_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aqi_user -d smart_aqi"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  smart_aqi_postgres_data:

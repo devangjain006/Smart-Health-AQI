@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: smart-health-aqi-openaq
+    runtime: docker
+    plan: free
+    dockerfilePath: phase2-openaq/Dockerfile
+    dockerContext: phase2-openaq
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:////tmp/smart_aqi.db

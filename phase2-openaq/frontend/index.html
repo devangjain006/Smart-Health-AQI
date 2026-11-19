@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Air Quality + Health Risk Monitor</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <h1>Smart City AQI &amp; Health Risk Monitor</h1>
+      <p class="tagline">Live demo that simulates a small network of sensors, anomaly detection, and public health advisories.</p>
+    </header>
+
+    <section class="grid">
+      <article class="card highlight home-card">
+        <div class="home-card__header">
+          <h2 id="home-title">Set your home city</h2>
+          <button id="change-home" class="ghost-button" hidden>Change</button>
+        </div>
+        <div class="aqi-value" id="home-aqi">--</div>
+        <p id="home-advisory">Search for a city below and set it as home.</p>
+        <div class="reading-meta">
+          <span>City: <strong id="home-city">--</strong></span>
+          <span>PM2.5: <strong id="home-pm25">--</strong></span>
+          <span>PM10: <strong id="home-pm10">--</strong></span>
+          <span>Updated: <strong id="home-updated">--</strong></span>
+        </div>
+      </article>
+
+      <article class="card timeline-card">
+        <div class="card-header-inline">
+          <h2>Home AQI Timeline</h2>
+          <span class="muted" id="timeline-hint">Waiting for home city...</span>
+        </div>
+        <canvas id="aqi-chart" width="400" height="220"></canvas>
+      </article>
+
+      <article class="card alerts-card">
+        <h2>Notifications & Advisories</h2>
+        <div id="alerts-advice" class="advice-box">
+          Add a home city to receive personalized notifications.
+        </div>
+        <ul id="alert-list" class="alert-list">
+          <li>Loading network alerts...</li>
+        </ul>
+      </article>
+
+      <article class="card wide health-card">
+        <h2>Health Risk Monitor</h2>
+        <div id="risk-grid" class="risk-grid">
+          <p class="muted">Collecting data...</p>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <h2>Find Live AQI by Location</h2>
+        <div class="location-search">
+          <input
+            type="text"
+            id="location-input"
+            placeholder="Search for a city, station, or landmark"
+            aria-label="Location search"
+          />
+          <button id="location-button">Search</button>
+        </div>
+        <div class="location-layout">
+          <div class="location-results">
+            <ul id="location-results">
+              <li class="muted">Type a city name to pull live readings or set it as home.</li>
+            </ul>
+          </div>
+          <div id="map" aria-label="Live AQI map"></div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/app.js" type="module"></script>
+</body>
+
+</html>
+
